@@ -1,5 +1,8 @@
 package controllers;
 
+import model.Product;
+import model.ProductDetails;
+
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -15,11 +18,24 @@ public class UserController {
     @Path("/all")
     @GET
     @Produces("application/json")
-    public JsonArray getAll()
-    {
+    public JsonArray getAll() {
         JsonArrayBuilder builder = Json.createArrayBuilder();
-        builder.add(Json.createObjectBuilder().add("name","Arka Dutta"));
-        builder.add(Json.createObjectBuilder().add("email","arka.dutta@globalids.com"));
+        builder.add(Json.createObjectBuilder().add("name", "Arka Dutta"));
+        builder.add(Json.createObjectBuilder().add("email", "arka.dutta@globalids.com"));
         return builder.build();
+    }
+
+    @Path("/product")
+    @GET
+    @Produces("application/json")
+    public Product getProductDetails() {
+        Product obj = new Product();
+        obj.setProductName("MacBook");
+        ProductDetails productDetails = new ProductDetails();
+        productDetails.setQuantity(45);
+        productDetails.setPrice(4589.30);
+        productDetails.setStock(12);
+        obj.setProductDetails(productDetails);
+        return obj;
     }
 }
